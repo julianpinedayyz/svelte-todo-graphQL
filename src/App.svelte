@@ -1,4 +1,6 @@
 <script>
+  import ApolloClient from "apollo-boost";
+  import { setClient } from "svelte-apollo";
 	export let name;
 </script>
 
