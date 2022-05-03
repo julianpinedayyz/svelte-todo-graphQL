@@ -2,7 +2,19 @@
   import ApolloClient from "apollo-boost";
   import { setClient } from "svelte-apollo";
   import Todo from "./Todo.svelte";
+
 	export let name;
+
+  const client = new ApolloClient({
+    uri: "http://localhost:5055/graphql",
+
+    onError: function ({networkError, graphQLErrors }) {
+      console.log("graphQLErrors", graphQLErrors);
+      console.log("networkError", networkError);
+    },
+  });
+
+  setClient(client);
 </script>
 
 <main>
