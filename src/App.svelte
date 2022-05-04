@@ -17,25 +17,18 @@
 
   setClient(client);
 
-
   const GETTODO = gql`
-  query allData {
-    allTodos {
-      nodes {
-        id
-        title
-        done
+    query allData {
+      allTodos {
+        nodes {
+          id
+          title
+          done
+        }
       }
     }
-  }
   `;
 
-  const listTasks = async () => {
-    const reply = query(GETTODO);
-    //reply.subscribe(data => console.log('list', data));
-  };
-
-  // listTasks();
   const reply = query(GETTODO);
 
 
