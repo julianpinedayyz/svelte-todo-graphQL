@@ -1,12 +1,13 @@
 <script>
-  import ApolloClient from "apollo-boost";
-  import { setClient } from "svelte-apollo";
-  import Todo from "./Todo.svelte";
+  import { InMemoryCache, ApolloClient, gql } from "@apollo/client";
+  import { setClient, query, mutation } from "svelte-apollo";
+
 
 	export let name;
 
   const client = new ApolloClient({
     uri: "http://localhost:5055/graphql",
+    cache: new InMemoryCache(),
 
     onError: function ({networkError, graphQLErrors }) {
       console.log("graphQLErrors", graphQLErrors);
@@ -15,11 +16,50 @@
   });
 
   setClient(client);
+
+
+  const GETTODO = gql`
+  query allData {
+    allTodos {
+      nodes {
+        id
+        title
+        done
+      }
+    }
+  }
+  `;
+
+  const listTasks = async () => {
+    const reply = query(GETTODO);
+    //reply.subscribe(data => console.log('list', data));
+  };
+
+  // listTasks();
+  const reply = query(GETTODO);
+
+
+
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <!-- <Todo /> -->
+  <div style="text-align:center">
+    <h1>Hello {name}!</h1>
+    <h2>Svedos</h2>
+
+
+    {#if $reply.loading}
+      Loading...
+    {:else if $reply.error}
+      Error: {$reply.error.message}
+    {:else}
+      {#each $reply.data.allTodos.nodes as task}
+        <p>{task.id} {task.title} {task.done}</p>
+      {/each}
+    {/if}
+  </div>
+
 </main>
 
 <style>
