@@ -1,11 +1,13 @@
 <script>
-  import { InMemoryCache, ApolloClient, gql } from "@apollo/client";
-  import { setClient, query, mutation } from "svelte-apollo";
+  import { InMemoryCache, ApolloClient } from "@apollo/client";
+  import setClient from "svelte-apollo";
+  import Todo from "./Todo.svelte";
+  import Add from "./Add.svelte";
 
 
 	export let name;
 
-  const client = new ApolloClient({
+  export const client = new ApolloClient({
     uri: "http://localhost:5055/graphql",
     cache: new InMemoryCache(),
 
@@ -17,22 +19,6 @@
 
   setClient(client);
 
-  const GETTODO = gql`
-    query allData {
-      allTodos {
-        nodes {
-          id
-          title
-          done
-        }
-      }
-    }
-  `;
-
-  const reply = query(GETTODO);
-
-
-
 </script>
 
 <main>
@@ -40,17 +26,8 @@
   <div style="text-align:center">
     <h1>Hello {name}!</h1>
     <h2>Svedos</h2>
-
-
-    {#if $reply.loading}
-      Loading...
-    {:else if $reply.error}
-      Error: {$reply.error.message}
-    {:else}
-      {#each $reply.data.allTodos.nodes as task}
-        <p>{task.id} {task.title} {task.done}</p>
-      {/each}
-    {/if}
+    <Add/>
+    <Todo/>
   </div>
 
 </main>
