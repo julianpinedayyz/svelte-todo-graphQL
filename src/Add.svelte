@@ -41,6 +41,10 @@
   /* .done {
     text-decoration: line-through;
   } */
+<style lang="scss">
+  .container{
+    margin-bottom: 40px;
+  }
 </style>
 
 <form on:submit|preventDefault="{handleSubmit}">
