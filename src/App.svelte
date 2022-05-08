@@ -74,6 +74,5 @@
     text-transform: uppercase;
     font-size: 36px;
     font-weight: 100;
-    margin-bottom: 40px;
   }
 </style>

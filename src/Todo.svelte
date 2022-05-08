@@ -93,7 +93,7 @@
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">{title}</td>
             <td>{done}</td>
-            <td><button class="button is-danger is-outlined" data-id="{id}" on:click|preventDefault="{handleDelete(id)}"><Fa icon={faTrashAlt}/></button></td>
+            <td><button class="button is-danger is-outlined" on:click|preventDefault="{handleDelete(id)}"><Fa icon={faTrashAlt}/></button></td>
           </tr>
         {/each}
         <!-- <tr><td>createdAt</td><td><span class="tag">{fd(st.data.task.createdAt)}</span></td></tr> -->
