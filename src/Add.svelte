@@ -1,14 +1,15 @@
 <script>
   import { mutation } from "svelte-apollo";
-  import { ADDTODO } from "./queries/addTODOS.svelte";
-  import { GETTODO } from "./queries/getTODOS.svelte";
-  import Fa from 'svelte-fa'
-  import { faPlus } from '@fortawesome/free-solid-svg-icons'
+  import Fa from 'svelte-fa';
+  import { faPlus } from '@fortawesome/free-solid-svg-icons';
+  import { createTodoMutation } from "./queries/createTODO.svelte";
+  import { readTodoQuery } from "./queries/getTODOS.svelte";
 
   let todoTitle = "";
   let todoDone = false;
 
-  const addTodo = mutation(ADDTODO);
+  const createTodo = mutation(createTodoMutation);
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -20,22 +21,21 @@
     }
     else {
       try {
-        await addTodo({
+        await createTodo({
           variables: {
             todoTitle,
             todoDone },
           refetchQueries: [
-            GETTODO, // DocumentNode object parsed with gql
-            'allData' // Query name
+            readTodoQuery, // DocumentNode object parsed with gql
+            'getTodo' // Query name
           ]
         });
       } catch (e) {
           console.error("error: ", e);
-      }
-       finally {
+      } finally {
           todoTitle = "";
           todoDone = false;
-       }
+      }
     }
   }
 </script>
