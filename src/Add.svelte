@@ -48,14 +48,12 @@
 
 <section class="section">
   <div class="container is-fluid">
-    <div class="columns is-centered">
+    <div class="columns">
       <div class="field has-addons">
         <form class="is-flex" on:submit|preventDefault="{handleSubmit}">
           <div class="control">
             <label class="is-sr-only" for="todo-title">Title</label>
             <input class="input" type="text" placeholder="new todo" id="todo-title" bind:value="{todoTitle}" />
-            <label class="is-sr-only" for="todo-done">Done Checkmark</label>
-            <!-- <input type="checkbox" id="todo-done" bind:checked="{todoDone}" class="is-checkradio"/> -->
           </div>
           <div class="control">
             <button class="button is-primary" type="submit"><Fa icon={faPlus} /></button>
