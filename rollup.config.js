@@ -3,10 +3,11 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-//import css from 'rollup-plugin-css-only';
+import css from 'rollup-plugin-css-only';
 import scss from 'rollup-plugin-scss';
 import preprocess from 'svelte-preprocess';
 import postcss from 'rollup-plugin-postcss';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,24 +42,47 @@ export default {
 	},
 	plugins: [
 		svelte({
-      hydratable: true,
-      emitCss: true,
+      // hydratable: true,
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
 			},
-      preprocess: preprocess()
+      preprocess: preprocess(),
+      emitCss: true
 		}),
+    // * XState setting from xstate package
+    //! https://xstate.js.org/docs/
+    replace({
+      'process.env.NODE_ENV': process.env.NODE_ENV
+    }),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
-		//css({ output: 'bundle.css' }),
+		css({ output: 'compsBundle.css' }),
     // Set scss
     scss({
+      output: true,
       sourceMap: true,
-      outputStyle: 'compressed',
-      output: 'public/build/bundle.css'
+      // outputStyle: 'compressed',
+      // sass: require('node-sass'),
+      output: 'public/build/bundle.css',
+      watch: 'src'
     }),
-    postcss(),
+    postcss({
+      extract: true,
+      minimize: true,
+      use: [
+        [
+          "sass",
+          {
+            includePaths: [
+              "./node_modules",
+              "./node_modules/bulma",
+              "./node_modules/bulma-extensions",
+              "./src"],
+          },
+        ],
+      ],
+    }),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
