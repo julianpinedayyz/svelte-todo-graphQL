@@ -73,6 +73,11 @@
   "resolved" "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz"
   "version" "1.1.3"
 
+"@graphile-contrib/pg-simplify-inflector@^6.1.0":
+  "integrity" "sha512-3eI2FP4ulu/fxwkJBNXhR6XEzqVz4wJWFr4LfeyUNNArUtLFx0DpP6YdcARCYgwLExFcIQNE8fnul3JKiciYIw=="
+  "resolved" "https://registry.npmjs.org/@graphile-contrib/pg-simplify-inflector/-/pg-simplify-inflector-6.1.0.tgz"
+  "version" "6.1.0"
+
 "@graphql-tools/graphql-file-loader@^7.3.11":
   "integrity" "sha512-3RMTfBN0VYSJH+5he9DxW8nGSn5p2+dNN2O2H88QSSwGorkONmKBdmf+9+JTzrEDvPObOzBjIuSD8wCnXlNaQA=="
   "resolved" "https://registry.npmjs.org/@graphql-tools/graphql-file-loader/-/graphql-file-loader-7.3.11.tgz"
@@ -188,7 +193,7 @@
     "magic-string" "^0.25.7"
     "resolve" "^1.17.0"
 
-"@rollup/plugin-graphql@^1.0.0":
+"@rollup/plugin-graphql@^1.1.0":
   "integrity" "sha512-X+H6oFlprDlnO3D0UiEytdW97AMphPXO0C7KunS7i/rBXIGQRQVDU5WKTXnBu2tfyYbjCTtfhXMSGI0i885PNg=="
   "resolved" "https://registry.npmjs.org/@rollup/plugin-graphql/-/plugin-graphql-1.1.0.tgz"
   "version" "1.1.0"
