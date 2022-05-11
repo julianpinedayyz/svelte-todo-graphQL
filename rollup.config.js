@@ -8,6 +8,7 @@ import scss from 'rollup-plugin-scss';
 import preprocess from 'svelte-preprocess';
 import postcss from 'rollup-plugin-postcss';
 import replace from '@rollup/plugin-replace';
+import graphql from '@rollup/plugin-graphql';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,6 +42,7 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+    graphql(),
 		svelte({
       // hydratable: true,
 			compilerOptions: {
@@ -53,7 +55,8 @@ export default {
     // * XState setting from xstate package
     //! https://xstate.js.org/docs/
     replace({
-      'process.env.NODE_ENV': process.env.NODE_ENV
+      'process.env.NODE_ENV': process.env.NODE_ENV,
+      'preventAssignment': true
     }),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
