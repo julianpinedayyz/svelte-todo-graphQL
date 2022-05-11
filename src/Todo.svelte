@@ -1,8 +1,10 @@
 <script>
+  import Modal from "./Modal.svelte";
   import { mutation, query } from "svelte-apollo";
   import { readTodoQuery} from "./queries/getTODOS.svelte";
   import { deleteTodoMutation } from "./queries/deleteTODO.svelte";
   import Fa from 'svelte-fa';
+  import { Switch } from 'svelma';
   import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
   import { updateTodoMutation } from "./queries/updateTODO.svelte";
 
@@ -102,7 +104,8 @@
           <th class="nameTag">Name</th>
           <!-- <th>Created at</th>
           <th>Status</th> -->
-          <th>Done?</th>
+          <th>Status</th>
+          <th>Edit</th>
           <th>Delete?</th>
         </tr>
       </thead>
@@ -111,7 +114,10 @@
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">{title}</td>
-            <td>{done}</td>
+            <td>
+              <Switch on:click={e => handleUpdate(id, done)}>{done}</Switch>
+            </td>
+            <td><Modal/></td>
             <td><button class="button is-danger is-outlined" on:click|preventDefault="{handleDelete(id)}"><Fa icon={faTrashAlt}/></button></td>
           </tr>
         {/each}
