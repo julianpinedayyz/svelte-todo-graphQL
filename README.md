@@ -132,8 +132,16 @@ TODO  List all enhancements made in `rollup.config.js`
 ## TODOS
 
 - Caching [graphQL caching](https://dev.to/ajcwebdev/graphql-caching-42ep)
--
-
+- Dgraph -> Try it as a second option. [https://github.com/dgraph-io/dgraph](https://github.com/dgraph-io/dgraph), [Getting started](https://dgraph.io/docs/get-started/), [Quick Start](https://dgraph.io/docs/graphql/quick-start/)
+- Urql as a thir option with Svelte [https://formidable.com/open-source/urql/docs/basics/svelte/](https://formidable.com/open-source/urql/docs/basics/svelte/)
+- **Apollo Quick Links**
+  - [GraphQL schema basics](https://www.apollographql.com/docs/apollo-server/schema/schema)
+  - [Mutations](https://www.apollographql.com/docs/react/v2/data/mutations/)
+  - [full-stack tutorial](https://www.apollographql.com/tutorials/fullstack-quickstart/introduction)
+  - [Resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/)
+- **GraphQL Quick References**
+  - [Designing GraphQL schemas](https://dgraph.io/blog/post/designing-graphql-schemas/)
+  -
 
 
 
