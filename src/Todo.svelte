@@ -4,6 +4,7 @@
   import { deleteTodoMutation } from "./queries/deleteTODO.svelte";
   import Fa from 'svelte-fa';
   import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+  import { updateTodoMutation } from "./queries/updateTODO.svelte";
 
   const todos = query(readTodoQuery);
 
@@ -14,9 +15,8 @@
 
   listTasks();
 
-  let todoID = 0;
-
   const deleteTodo = mutation(deleteTodoMutation);
+  let todoID = 0;
 
   async function handleDelete(todoID){
     try{
@@ -33,6 +33,25 @@
       todoID = 0;
     }
   };
+
+  const updateTodo = mutation(updateTodoMutation);
+  let todoStatus = false;
+
+  async function handleUpdate(todoID, todoStatus){
+    try {
+      await updateTodo({
+        variables: {
+          todoID,
+          todoStatus: !todoStatus
+        }
+      });
+    } catch (e) {
+        console.error("error: ", e);
+    } finally {
+        todoID = 0;
+        todoStatus = false;
+    }
+  }
 
 </script>
 
