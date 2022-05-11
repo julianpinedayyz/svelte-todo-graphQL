@@ -6,6 +6,8 @@
   import Fa from 'svelte-fa';
   import { Switch } from 'svelma';
   import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+  // import {interpret} from 'xstate';
+  // import {toggleMachine} from './machine';
   import { updateTodoMutation } from "./queries/updateTODO.svelte";
 
   const todos = query(readTodoQuery);
