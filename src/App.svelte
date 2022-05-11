@@ -1,31 +1,15 @@
 <script>
-  import { InMemoryCache, ApolloClient, gql } from "@apollo/client";
-  import { setClient } from "svelte-apollo";
   import Todo from "./Todo.svelte";
   import Add from "./Add.svelte";
+  import { InMemoryCache, ApolloClient } from "@apollo/client";
+  import { setClient } from "svelte-apollo";
+  import typeDefs from './schema/schema.graphql';
   import Fa from 'svelte-fa';
+  import './app.scss';
 
 
-  const typeDefs = gql`
-    type Todo {
-      id: Int!
-      title: String!
-      done: Boolean
-    }
-    input TodoInput {
-      title: String!
-      done: Boolean
-    }
-
-    type Query {
-      getTodo(id: Int!): [Todo]
-    }
-
-    type Mutation {
-      createTodo(input: TodoInput): Todo
-      deleteTodoById(id: Int!): Todo
-    }
-  `;
+  // const typeDefs = gql`
+  // `;
   // Resolver map
   // const resolvers = {
   //   Query: {
@@ -40,7 +24,7 @@
     cache: new InMemoryCache({
       // If true, the cache automatically adds __typename fields
       // to all objects in outgoing queries, removing the need to add them manually.
-      addTypename: false
+      // addTypename: false
     }),
     // resolvers,
     typeDefs,
@@ -55,8 +39,10 @@
   setClient(client);
 
 </script>
+<!--  -->
 <svelte:head>
-  <style src="./scss-entrypoint.scss"></style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="/build/compsBundle.css">
 </svelte:head>
 <main>
   <h1>GRAPHQL LIST OF PENDINGS</h1>
@@ -64,15 +50,17 @@
   <Todo/>
 </main>
 
-<style>
+<style lang="scss">
   main {
     text-align: center;
     padding: 20px;
   }
+
   h1 {
     color: #ff3e00;
     text-transform: uppercase;
-    font-size: 36px;
+    font-size: 40px;
+    margin-bottom: 30px;
     font-weight: 100;
   }
 </style>
