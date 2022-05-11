@@ -107,3 +107,43 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+## Project Specific Additions
+
+TODO  List all enhancements made in `rollup.config.js`
+
+### GraphQL
+
+- Install [@graphile-contrib/pg-simplify-inflector](https://github.com/graphile/pg-simplify-inflector#graphile-contribpg-simplify-inflector) so you can build simple custom mutations.
+  ```bash
+  npm install --save @graphile-contrib/pg-simplify-inflector
+  ```
+
+### Svelte
+
+- For `SCSS` files, `<style lang="scss"></style>` **lang** attribute needs to be defined so we can write SCSS inside any component
+
+### Rollup
+
+- Install [@rollup/plugin-graphql](https://www.npmjs.com/package/@rollup/plugin-graphql?activeTab=readme) so Apollo server recognizes the schema as `schema.graphql` when importing it and defining it `import typeDefs from './schema/schema.graphql';` in your App.svelte file.
+
+  ```bash
+  npm install @rollup/plugin-graphql --save-dev
+  ```
+## TODOS
+
+- Caching [graphQL caching](https://dev.to/ajcwebdev/graphql-caching-42ep)
+-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
