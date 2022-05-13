@@ -7,17 +7,14 @@
   import Fa from 'svelte-fa';
   import './app.scss';
 
-
-  // const typeDefs = gql`
-  // `;
   // Resolver map
-  // const resolvers = {
-  //   Query: {
-  //     getTodo() {
-  //       return getTodos;
-  //     }
-  //   },
-  // };
+  const resolvers = {
+    Query: {
+      getTodo() {
+        return getTodos;
+      }
+    },
+  };
 
   export const client = new ApolloClient({
     uri: "http://localhost:5055/graphql",
@@ -26,8 +23,8 @@
       // to all objects in outgoing queries, removing the need to add them manually.
       // addTypename: false
     }),
-    // resolvers,
     typeDefs,
+    resolvers,
     csrfPrevention: true,
 
     onError: function ({networkError, graphQLErrors }) {
