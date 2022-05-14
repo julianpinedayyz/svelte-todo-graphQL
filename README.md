@@ -121,6 +121,10 @@ TODO  List all enhancements made in `rollup.config.js`
 ### Svelte
 
 - For `SCSS` files, `<style lang="scss"></style>` **lang** attribute needs to be defined so we can write SCSS inside any component
+- For font awesome to work in the Icon component, a call to the fonts need to be added in the App.svelte file
+  ```html
+  <script src="https://kit.fontawesome.com/9468b47b6e.js" crossorigin="anonymous"></script>
+  ```
 
 ### Rollup
 
