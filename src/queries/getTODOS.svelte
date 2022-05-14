@@ -3,12 +3,10 @@
 
   export const readTodoQuery = gql`
     query getTodo {
-      todos {
-        nodes {
-          id
-          title
-          done
-        }
+      todosList {
+        id
+        title
+        done
       }
     }
   `;
