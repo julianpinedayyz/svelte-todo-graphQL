@@ -16,6 +16,8 @@
     },
   };
 
+  // To run the client
+  // postgraphile -c "postgres://localhost:5432/test" --watch -p 5055 --cors --enhance-graphiql --extended-errors hint,detail,errcode
   export const client = new ApolloClient({
     uri: "http://localhost:5055/graphql",
     cache: new InMemoryCache({
@@ -40,6 +42,7 @@
 <svelte:head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="/build/compsBundle.css">
+  <script src="https://kit.fontawesome.com/9468b47b6e.js" crossorigin="anonymous"></script>
 </svelte:head>
 <main>
   <h1>GRAPHQL LIST OF PENDINGS</h1>
