@@ -28,7 +28,6 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
     "@graphql-tools/graphql-file-loader": "^7.3.11",
     "@graphql-tools/load": "^7.5.10",
     "@graphql-tools/utils": "^8.6.9",
