@@ -3,7 +3,7 @@
 
   export const readTodoQuery = gql`
     query getTodo {
-      allTodos {
+      todos {
         nodes {
           id
           title

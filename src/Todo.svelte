@@ -77,13 +77,13 @@
       <div class="level-item has-text-centered">
         <div>
           <p class="heading">Total Posts</p>
-          <p class="title">{ $todos.data.allTodos.nodes.length }</p>
+          <p class="title">{ $todos.data.todos.nodes.length }</p>
         </div>
       </div>
       <div class="level-item has-text-centered">
         <div>
           <p class="heading">Completed</p>
-          <p class="title">{ $todos.data.allTodos.nodes.filter(todo => todo.done).length}</p>
+          <p class="title">{ $todos.data.todos.nodes.filter(todo => todo.done).length}</p>
         </div>
       </div>
       <div class="level-item has-text-centered">
@@ -112,7 +112,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each [...$todos.data.allTodos.nodes].reverse() as { id, title, done }, i}
+        {#each [...$todos.data.todos.nodes].reverse() as { id, title, done }, i}
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">{title}</td>

@@ -17,7 +17,7 @@
   };
 
   // To run the client
-  // postgraphile -c "postgres://localhost:5432/test" --watch -p 5055 --cors --enhance-graphiql --extended-errors hint,detail,errcode
+  // postgraphile -c "postgres://localhost:5432/test" --watch -p 5055 --cors --enhance-graphiql --extended-errors hint,detail,errcode -append-plugins @graphile-contrib/pg-simplify-inflector
   export const client = new ApolloClient({
     uri: "http://localhost:5055/graphql",
     cache: new InMemoryCache({
