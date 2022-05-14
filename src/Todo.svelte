@@ -1,11 +1,10 @@
 <script>
-  import Modal from "./Modal.svelte";
   import { mutation, query } from "svelte-apollo";
   import { readTodoQuery} from "./queries/getTODOS.svelte";
   import { deleteTodoMutation } from "./queries/deleteTODO.svelte";
   import Fa from 'svelte-fa';
-  import { Switch } from 'svelma';
-  import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+  import { Button } from 'svelma';
+  import { faArrowRotateLeft, faCheck, faTrashAlt, faPenAlt } from "@fortawesome/free-solid-svg-icons";
   // import {interpret} from 'xstate';
   // import {toggleMachine} from './machine';
   import { updateTodoMutation } from "./queries/updateTODO.svelte";
@@ -56,6 +55,7 @@
         todoStatus = false;
     }
   }
+
 
 </script>
 
@@ -116,11 +116,18 @@
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">{title}</td>
+              {#if done == false }
+                <td><Button type="is-success" on:click={e => handleUpdate(id, done)}><Fa icon={faCheck}/></Button></td>
+                <td><Button class="block js-modal-trigger" data-target="editModal"><Fa icon={faPenAlt}/></Button></td>
+              {:else}
+                <td><Button disabled>Done</Button></td>
+                <td><Button type="is-warning" on:click={e => handleUpdate(id, done)}><Fa icon={faArrowRotateLeft}/></Button></td>
+              {/if}
             <td>
-              <Switch on:click={e => handleUpdate(id, done)}>{done}</Switch>
+              <button class="button is-danger is-outlined" on:click|preventDefault="{handleDelete(id)}">
+                <Fa icon={faTrashAlt}/>
+              </button>
             </td>
-            <td><Modal/></td>
-            <td><button class="button is-danger is-outlined" on:click|preventDefault="{handleDelete(id)}"><Fa icon={faTrashAlt}/></button></td>
           </tr>
         {/each}
         <!-- <tr><td>createdAt</td><td><span class="tag">{fd(st.data.task.createdAt)}</span></td></tr> -->
