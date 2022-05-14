@@ -135,6 +135,8 @@ TODO  List all enhancements made in `rollup.config.js`
   ```
 ## TODOS
 
+- **Svelte Specifics**
+- Add Drag and drop capabilities to arrange posts [Drag and drop with Svelte using svelte-dnd-action](https://dev.to/isaachagoel/drag-and-drop-with-svelte-using-svelte-dnd-action-4554)
 - Caching [graphQL caching](https://dev.to/ajcwebdev/graphql-caching-42ep)
 - Dgraph -> Try it as a second option. [https://github.com/dgraph-io/dgraph](https://github.com/dgraph-io/dgraph), [Getting started](https://dgraph.io/docs/get-started/), [Quick Start](https://dgraph.io/docs/graphql/quick-start/)
 - Urql as a thir option with Svelte [https://formidable.com/open-source/urql/docs/basics/svelte/](https://formidable.com/open-source/urql/docs/basics/svelte/)
