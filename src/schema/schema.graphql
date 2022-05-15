@@ -21,6 +21,6 @@ type TodoUpdate {
 
 type Mutation {
   createTodo(input: TodoInput): Todo
-  deleteTodoById(id: Int!): Todo
-  updateTodoById(input: TodoUpdate): Todo
+  deleteTodo(id: Int!): Todo
+  updateTodo(input: TodoUpdate): Todo
 }
