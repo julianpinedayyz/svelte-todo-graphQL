@@ -1,18 +1,17 @@
 <script context="module">
-  import { gql } from "@apollo/client";
+  import { gql } from '@apollo/client';
 
   export const updateTodoMutation = gql`
-    mutation ($todoID: Int!, $todoStatus: Boolean) {
-      updateTodoById(input: {id: $todoID, todoPatch: {done: $todoStatus}}) {
-        clientMutationId
+    mutation ($todoID: Int!, $done: Boolean, $title: String) {
+      updateTodo(
+        input: { id: $todoID, patch: { done: $done, title: $title } }
+      ) {
         todo {
-          done
           id
+          title
+          done
         }
       }
     }
   `;
 </script>
-
-
-

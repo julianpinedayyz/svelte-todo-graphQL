@@ -1,9 +1,9 @@
 <script context="module">
-  import { gql } from "@apollo/client";
+  import { gql } from '@apollo/client';
 
   export const deleteTodoMutation = gql`
     mutation ($todoID: Int!) {
-      deleteTodoById(input: {id: $todoID}) {
+      deleteTodo(input: { id: $todoID }) {
         todo {
           id
         }
