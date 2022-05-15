@@ -1,19 +1,24 @@
 <script>
-  import { mutation, query } from "svelte-apollo";
-  import { readTodoQuery} from "./queries/getTODOS.svelte";
-  import { deleteTodoMutation } from "./queries/deleteTODO.svelte";
+  import { mutation, query } from 'svelte-apollo';
+  import { readTodoQuery } from './queries/getTODOS.svelte';
+  import { deleteTodoMutation } from './queries/deleteTODO.svelte';
   import Fa from 'svelte-fa';
   import { Button } from 'svelma';
-  import { faArrowRotateLeft, faCheck, faTrashAlt, faPenAlt } from "@fortawesome/free-solid-svg-icons";
+  import {
+    faArrowRotateLeft,
+    faCheck,
+    faTrashAlt,
+    faPenAlt,
+  } from '@fortawesome/free-solid-svg-icons';
   // import {interpret} from 'xstate';
   // import {toggleMachine} from './machine';
-  import { updateTodoMutation } from "./queries/updateTODO.svelte";
+  import { updateTodoMutation } from './queries/updateTODO.svelte';
 
   const todos = query(readTodoQuery);
 
   const listTasks = async () => {
     const reply = query(readTodoQuery);
-    reply.subscribe(data => console.log('todosList', data));
+    reply.subscribe((data) => console.log('todosList', data));
   };
 
   listTasks();
@@ -21,52 +26,42 @@
   const deleteTodo = mutation(deleteTodoMutation);
   let todoID = 0;
 
-  async function handleDelete(todoID){
-    try{
-        deleteTodo({
-          variables: { todoID },
-          refetchQueries: [
-            readTodoQuery, // DocumentNode object parsed with gql
-            'getTodo' // Query name
-          ]
+  async function handleDelete(todoID) {
+    try {
+      deleteTodo({
+        variables: { todoID },
+        refetchQueries: [
+          readTodoQuery, // DocumentNode object parsed with gql
+          'getTodo', // Query name
+        ],
       });
-    } catch(e) {
-        console.error("error: ", e);
+    } catch (e) {
+      console.error('error: ', e);
     } finally {
       todoID = 0;
     }
-  };
+  }
 
   const updateTodo = mutation(updateTodoMutation);
   let todoStatus = false;
 
-  async function handleUpdate(todoID, todoStatus){
+  async function handleUpdate(todoID, todoStatus) {
     try {
       await updateTodo({
         variables: {
           todoID,
-          todoStatus: !todoStatus
-        }
+          todoStatus: !todoStatus,
+        },
       });
     } catch (e) {
-        console.error("error: ", e);
+      console.error('error: ', e);
     } finally {
-        todoID = 0;
-        todoStatus = false;
+      todoID = 0;
+      todoStatus = false;
     }
   }
-
-
 </script>
 
-<style lang="scss">
-  .todosTable {
-    width: 100%;
-    .nameTag {
-      text-align: left;
-    }
-  }
-</style>
 <section class="section">
   {#if $todos.loading}
     <span class="spinner-loader" style="margin-top: 10em">Loading…</span>
@@ -77,13 +72,15 @@
       <div class="level-item has-text-centered">
         <div>
           <p class="heading">Total Posts</p>
-          <p class="title">{ $todos.data.todosList.length }</p>
+          <p class="title">{$todos.data.todosList.length}</p>
         </div>
       </div>
       <div class="level-item has-text-centered">
         <div>
           <p class="heading">Completed</p>
-          <p class="title">{ $todos.data.todosList.filter(todo => todo.done).length}</p>
+          <p class="title">
+            {$todos.data.todosList.filter((todo) => todo.done).length}
+          </p>
         </div>
       </div>
       <div class="level-item has-text-centered">
@@ -116,16 +113,35 @@
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">{title}</td>
-              {#if done == false }
-                <td><Button type="is-success" on:click={e => handleUpdate(id, done)}><Fa icon={faCheck}/></Button></td>
-                <td><Button class="block js-modal-trigger" data-target="editModal"><Fa icon={faPenAlt}/></Button></td>
-              {:else}
-                <td><Button disabled>Done</Button></td>
-                <td><Button type="is-warning" on:click={e => handleUpdate(id, done)}><Fa icon={faArrowRotateLeft}/></Button></td>
-              {/if}
+            {#if done == false}
+              <td
+                ><Button
+                  type="is-success"
+                  on:click={(e) => handleUpdate(id, done)}
+                  ><Fa icon={faCheck} /></Button
+                ></td
+              >
+              <td
+                ><Button class="block js-modal-trigger" data-target="editModal"
+                  ><Fa icon={faPenAlt} /></Button
+                ></td
+              >
+            {:else}
+              <td><Button disabled>Done</Button></td>
+              <td
+                ><Button
+                  type="is-warning"
+                  on:click={(e) => handleUpdate(id, done)}
+                  ><Fa icon={faArrowRotateLeft} /></Button
+                ></td
+              >
+            {/if}
             <td>
-              <button class="button is-danger is-outlined" on:click|preventDefault="{handleDelete(id)}">
-                <Fa icon={faTrashAlt}/>
+              <button
+                class="button is-danger is-outlined"
+                on:click|preventDefault={handleDelete(id)}
+              >
+                <Fa icon={faTrashAlt} />
               </button>
             </td>
           </tr>
@@ -138,3 +154,12 @@
     </table>
   {/if}
 </section>
+
+<style lang="scss">
+  .todosTable {
+    width: 100%;
+    .nameTag {
+      text-align: left;
+    }
+  }
+</style>
