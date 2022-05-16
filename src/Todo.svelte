@@ -13,6 +13,9 @@
   // import {interpret} from 'xstate';
   // import {toggleMachine} from './machine';
   import { updateTodoMutation } from './queries/updateTODO.svelte';
+  // 1import { marked } from 'marked';
+  import ModalCard from './ModalCard.svelte';
+  let active = false;
 
   const todos = query(readTodoQuery);
 
@@ -60,6 +63,30 @@
       todoStatus = false;
     }
   }
+  let modalContent;
+  async function handleEdit(todoID, todoTitle) {
+    console.log(todoTitle);
+    console.log(todoID);
+    active = !active;
+    try {
+      modalContent = todoTitle;
+
+      if (closeSuccess() == true) {
+        console.log(modalContent);
+        // await updateTodo({
+        //   variables: {
+        //     todoID,
+        //     todoTitle: modalContent,
+        //   },
+        // });
+      }
+    } catch (e) {
+      console.error('error: ', e);
+    } finally {
+      modalContent = '';
+    }
+  }
+  // on:click={(e) => handleEdit(id, title)}
 </script>
 
 <section class="section">
@@ -122,7 +149,10 @@
                 ></td
               >
               <td
-                ><Button class="block js-modal-trigger" data-target="editModal"
+                ><Button
+                  class="js-modal-trigger"
+                  data-target="editModal"
+                  on:click={() => handleEdit(id, title)}
                   ><Fa icon={faPenAlt} /></Button
                 ></td
               >
@@ -153,6 +183,12 @@
       </tbody>
     </table>
   {/if}
+  <ModalCard bind:active title="Edit Todo" saveButton="Save Todo's Edit">
+    <textarea class="textarea is-primary" bind:value={modalContent} />
+    <!-- <div>
+      {@html marked(modalContent)}
+    </div> -->
+  </ModalCard>
 </section>
 
 <style lang="scss">
@@ -161,5 +197,8 @@
     .nameTag {
       text-align: left;
     }
+  }
+  .textarea {
+    width: 100%;
   }
 </style>
