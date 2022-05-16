@@ -1,9 +1,9 @@
 <script>
   import { mutation } from 'svelte-apollo';
-  import Fa from 'svelte-fa';
-  import { faPlus } from '@fortawesome/free-solid-svg-icons';
   import { createTodoMutation } from './queries/createTODO.svelte';
   import { readTodoQuery } from './queries/getTODOS.svelte';
+  // import { marked } from 'marked';
+  import Icon from './Icon.svelte';
 
   let todoTitle = '';
   let todoDone = false;
@@ -40,25 +40,32 @@
 </script>
 
 <section class="section">
-  <div class="container is-fluid">
-    <div class="field has-addons">
-      <form class="is-flex" on:submit|preventDefault={handleSubmit}>
-        <div class="control">
-          <label class="is-sr-only" for="todo-title">Title</label>
-          <input
-            class="input"
-            type="text"
-            placeholder="new todo"
-            id="todo-title"
-            bind:value={todoTitle}
-          />
-        </div>
-        <div class="control">
-          <button class="button is-primary" type="submit"
-            ><Fa icon={faPlus} /></button
-          >
-        </div>
-      </form>
+  <div class="content">
+    <div class="columns">
+      <div class="column is-full quickTodo">
+        <form class="field has-addons" on:submit|preventDefault={handleSubmit}>
+          <p class="control is-expanded">
+            <label class="is-sr-only" for="todo-title">Quick Todo</label>
+            <input
+              class="input"
+              type="text"
+              placeholder="new todo"
+              id="todo-title"
+              bind:value={todoTitle}
+            />
+          </p>
+          <p class="control">
+            <button class="button is-primary" type="submit">
+              <span class="icon-text">
+                <span class="icon">
+                  <Icon pack="fa" size="" icon="square-plus" isLeft="true" />
+                </span>
+                <span>Quick Todo</span>
+              </span>
+            </button>
+          </p>
+        </form>
+      </div>
     </div>
   </div>
 </section>

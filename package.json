@@ -33,6 +33,7 @@
     "@graphql-tools/utils": "^8.6.9",
     "autoprefixer": "^10.4.7",
     "bulma-extensions": "^6.2.7",
+    "marked": "^4.0.15",
     "postcss": "^8.4.13",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-scss": "^3.0.0",
