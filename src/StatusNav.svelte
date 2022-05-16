@@ -1,7 +1,3 @@
-<script>
-  import { todos } from './queries/getTODOS.svelte';
-</script>
-
 <nav class="level">
   <div class="level-item has-text-centered">
     <div>
