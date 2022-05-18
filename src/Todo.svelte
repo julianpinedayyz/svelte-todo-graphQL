@@ -88,16 +88,27 @@
   }
   // on:click={(e) => handleEdit(id, title)}
   let newTitle = '';
-  let oldTitle = '';
-  let updateID;
   let onBlur;
   const handleQuickUpdate = (id) => (event) => {
-    // oldTitle = title;
     newTitle = event.target.innerText;
-    console.log(newTitle);
-    console.log(id);
     onBlur = () => {
-      console.log('Im out');
+      try {
+        updateTodo({
+          variables: {
+            todoID: id,
+            todoTitle: newTitle.toString(),
+          },
+          refetchQueries: [
+            readTodoQuery, // DocumentNode object parsed with gql
+            'getTodo', // Query name
+          ],
+        });
+      } catch (e) {
+        console.error('error: ', e);
+      } finally {
+        todoID = 0;
+        newTitle = '';
+      }
     };
   };
 </script>
