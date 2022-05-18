@@ -87,6 +87,19 @@
     }
   }
   // on:click={(e) => handleEdit(id, title)}
+  let newTitle = '';
+  let oldTitle = '';
+  let updateID;
+  let onBlur;
+  const handleQuickUpdate = (id) => (event) => {
+    // oldTitle = title;
+    newTitle = event.target.innerText;
+    console.log(newTitle);
+    console.log(id);
+    onBlur = () => {
+      console.log('Im out');
+    };
+  };
 </script>
 
 <section class="section">
@@ -139,7 +152,15 @@
         {#each [...$todos.data.todosList].reverse() as { id, title, done }, i}
           <tr>
             <td><span class="tag">{id}</span></td>
-            <td class="has-text-left">{title}</td>
+            <td class="has-text-left"
+              ><p
+                contenteditable="true"
+                on:input={handleQuickUpdate(id)}
+                on:blur={onBlur}
+              >
+                {title}
+              </p>
+            </td>
             {#if done == false}
               <td
                 ><Button
