@@ -9,7 +9,7 @@
   export let size = '';
   export let showClose = true;
   export let onBody = true;
-  export let saveButton = 'Save changess';
+  export let saveButton = 'Save changes';
   export let success = true;
 
   const dispatch = createEventDispatcher();
@@ -34,7 +34,7 @@
     }
   }
 
-  export function closeSuccess() {
+  function closeSuccess() {
     dispatch('success', success);
     console.log(success);
     close();
