@@ -2,7 +2,7 @@
   import { onDestroy, onMount, createEventDispatcher } from 'svelte';
   import { chooseAnimation, isEscKey } from './utils/index';
 
-  export let active = true;
+  export let active = false;
   export let title = 'Modal Title';
   export let animation = 'scale';
   export let animProps = { start: 1.2 };
@@ -34,12 +34,13 @@
     }
   }
 
-  function closeSuccess() {
+  export function closeSuccess() {
     dispatch('success', success);
     console.log(success);
     close();
     return success;
   }
+
   function closeFailure() {
     dispatch('failure');
     close();

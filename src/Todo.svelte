@@ -2,6 +2,9 @@
   import { mutation, query } from 'svelte-apollo';
   import { readTodoQuery } from './queries/getTODOS.svelte';
   import { deleteTodoMutation } from './queries/deleteTODO.svelte';
+  import { updateTodoMutation } from './queries/updateTODO.svelte';
+  import { quickUpdate, onBlur } from './quickUpdate.store';
+  import { onMount } from 'svelte';
   import Fa from 'svelte-fa';
   import { Button } from 'svelma';
   import {
@@ -12,9 +15,6 @@
   } from '@fortawesome/free-solid-svg-icons';
   // import {interpret} from 'xstate';
   // import {toggleMachine} from './machine';
-  import { updateTodoMutation } from './queries/updateTODO.svelte';
-  // import ModalCard from './ModalCard.svelte';
-  let active = false;
 
   const todos = query(readTodoQuery);
 
@@ -51,7 +51,7 @@
     try {
       await updateTodo({
         variables: {
-          todoID,
+          todoID: todoID,
           todoStatus: !todoStatus,
         },
       });
@@ -62,27 +62,64 @@
       todoStatus = false;
     }
   }
-  let modalContent;
 
   // const handleEdit = (id, title) => (event) => {
   //   modalContent = title;
+  //   console.log(modalContent);
   // };
+  import ModalCard from './ModalCard.svelte';
+
+  let active = false;
+  let modalContent;
+  let success = false;
+  let closeModal;
+  let modalCardcomponent;
+
+  onMount(() => {
+    closeModal = () => {
+      modalCardcomponent.closeSuccess();
+    };
+  });
+  async function openModal(id, title) {
+    console.log('from inside the Modal component');
+    console.log(id);
+    console.log(title);
+    active = true;
+    console.log(success);
+    modalContent = title;
+    if (success === false) {
+      console.log('Cerrando y perfecto');
+      // try {
+      //   if (active == false) {
+      //     console.log(active);
+      //     await updateTodo({
+      //       variables: {
+      //         todoID,
+      //         todoTitle: modalContent,
+      //       },
+      //     });
+      //   }
+      // } catch (e) {
+      //   console.error('error: ', e);
+      // } finally {
+      //   modalContent = '';
+      //   active = !active;
+      // }
+    }
+  }
   // async function handleEdit(todoID, todoTitle) {
   //   modalContent = todoTitle;
-  //   console.log(todoTitle);
+  //   console.log(modalContent);
   //   console.log(todoID);
-  //   console.log(active);
   //   try {
-  //     modalContent = todoTitle;
-
   //     if (active == false) {
   //       console.log(active);
-  //       // await updateTodo({
-  //       //   variables: {
-  //       //     todoID,
-  //       //     todoTitle: modalContent,
-  //       //   },
-  //       // });
+  //       await updateTodo({
+  //         variables: {
+  //           todoID,
+  //           todoTitle: modalContent,
+  //         },
+  //       });
   //     }
   //   } catch (e) {
   //     console.error('error: ', e);
@@ -91,7 +128,6 @@
   //     active = !active;
   //   }
   // }
-  import { quickUpdate, onBlur } from './quickUpdate.store';
 </script>
 
 <section class="section">
@@ -165,7 +201,7 @@
                 ><Button
                   class="js-modal-trigger"
                   data-target="editModal"
-                  on:click={() => handleEdit(id, title)}
+                  on:click={() => openModal(id, title)}
                   ><Fa icon={faPenAlt} /></Button
                 ></td
               >
@@ -195,13 +231,16 @@
         <!-- <tr><td>owner</td><td><span class="tag">{st.data.task.userId}</span></td></tr> -->
       </tbody>
     </table>
+    <ModalCard
+      bind:active
+      title="Edit Todo"
+      saveButton="Save Todo's Edit"
+      bind:this={modalCardcomponent}
+    >
+      <textarea class="textarea is-primary" bind:value={modalContent} />
+      <button on:click|preventDefault={closeModal}>Click</button>
+    </ModalCard>
   {/if}
-  <!-- <ModalCard bind:active title="Edit Todo" saveButton="Save Todo's Edit">
-    <textarea class="textarea is-primary" bind:value={modalContent} />
-    <div>
-
-    </div>
-  </ModalCard> -->
 </section>
 
 <style lang="scss">
