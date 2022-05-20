@@ -13,8 +13,7 @@
   // import {interpret} from 'xstate';
   // import {toggleMachine} from './machine';
   import { updateTodoMutation } from './queries/updateTODO.svelte';
-  // 1import { marked } from 'marked';
-  import ModalCard from './ModalCard.svelte';
+  // import ModalCard from './ModalCard.svelte';
   let active = false;
 
   const todos = query(readTodoQuery);
@@ -64,53 +63,35 @@
     }
   }
   let modalContent;
-  async function handleEdit(todoID, todoTitle) {
-    console.log(todoTitle);
-    console.log(todoID);
-    active = !active;
-    try {
-      modalContent = todoTitle;
 
-      if (closeSuccess() == true) {
-        console.log(modalContent);
-        // await updateTodo({
-        //   variables: {
-        //     todoID,
-        //     todoTitle: modalContent,
-        //   },
-        // });
-      }
-    } catch (e) {
-      console.error('error: ', e);
-    } finally {
-      modalContent = '';
-    }
-  }
-  // on:click={(e) => handleEdit(id, title)}
-  let newTitle = '';
-  let onBlur;
-  const handleQuickUpdate = (id) => (event) => {
-    newTitle = event.target.innerText;
-    onBlur = () => {
-      try {
-        updateTodo({
-          variables: {
-            todoID: id,
-            todoTitle: newTitle.toString(),
-          },
-          refetchQueries: [
-            readTodoQuery, // DocumentNode object parsed with gql
-            'getTodo', // Query name
-          ],
-        });
-      } catch (e) {
-        console.error('error: ', e);
-      } finally {
-        todoID = 0;
-        newTitle = '';
-      }
-    };
-  };
+  // const handleEdit = (id, title) => (event) => {
+  //   modalContent = title;
+  // };
+  // async function handleEdit(todoID, todoTitle) {
+  //   modalContent = todoTitle;
+  //   console.log(todoTitle);
+  //   console.log(todoID);
+  //   console.log(active);
+  //   try {
+  //     modalContent = todoTitle;
+
+  //     if (active == false) {
+  //       console.log(active);
+  //       // await updateTodo({
+  //       //   variables: {
+  //       //     todoID,
+  //       //     todoTitle: modalContent,
+  //       //   },
+  //       // });
+  //     }
+  //   } catch (e) {
+  //     console.error('error: ', e);
+  //   } finally {
+  //     modalContent = '';
+  //     active = !active;
+  //   }
+  // }
+  import { quickUpdate, onBlur } from './quickUpdate.store';
 </script>
 
 <section class="section">
@@ -160,13 +141,13 @@
         </tr>
       </thead>
       <tbody>
-        {#each [...$todos.data.todosList].reverse() as { id, title, done }, i}
+        {#each [...$todos.data.todosList].reverse() as { id, title, done }}
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left"
               ><p
                 contenteditable="true"
-                on:input={handleQuickUpdate(id)}
+                on:input={quickUpdate(id)}
                 on:blur={onBlur}
               >
                 {title}
@@ -176,7 +157,7 @@
               <td
                 ><Button
                   type="is-success"
-                  on:click={(e) => handleUpdate(id, done)}
+                  on:click={() => handleUpdate(id, done)}
                   ><Fa icon={faCheck} /></Button
                 ></td
               >
@@ -193,7 +174,7 @@
               <td
                 ><Button
                   type="is-warning"
-                  on:click={(e) => handleUpdate(id, done)}
+                  on:click={() => handleUpdate(id, done)}
                   ><Fa icon={faArrowRotateLeft} /></Button
                 ></td
               >
@@ -215,12 +196,12 @@
       </tbody>
     </table>
   {/if}
-  <ModalCard bind:active title="Edit Todo" saveButton="Save Todo's Edit">
+  <!-- <ModalCard bind:active title="Edit Todo" saveButton="Save Todo's Edit">
     <textarea class="textarea is-primary" bind:value={modalContent} />
-    <!-- <div>
-      {@html marked(modalContent)}
-    </div> -->
-  </ModalCard>
+    <div>
+
+    </div>
+  </ModalCard> -->
 </section>
 
 <style lang="scss">
