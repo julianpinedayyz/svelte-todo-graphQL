@@ -4,7 +4,6 @@
   import { InMemoryCache, ApolloClient } from '@apollo/client';
   import { setClient } from 'svelte-apollo';
   import typeDefs from './schema/schema.graphql';
-  import Fa from 'svelte-fa';
   import './app.scss';
 
   // Resolver map
