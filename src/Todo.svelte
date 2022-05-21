@@ -3,7 +3,7 @@
   import { readTodoQuery } from './queries/getTODOS.svelte';
   import { deleteTodoMutation } from './queries/deleteTODO.svelte';
   import { updateTodoMutation } from './queries/updateTODO.svelte';
-  import { quickUpdate, onBlur } from './quickUpdate.store';
+
   import { onMount } from 'svelte';
   import Fa from 'svelte-fa';
   import { Button } from 'svelma';
@@ -63,71 +63,79 @@
     }
   }
 
-  // const handleEdit = (id, title) => (event) => {
-  //   modalContent = title;
-  //   console.log(modalContent);
-  // };
   import ModalCard from './ModalCard.svelte';
 
   let active = false;
   let modalContent;
   let success = false;
   let closeModal;
+  let openModal;
   let modalCardcomponent;
+  let saveButton = "Save Todo's Edit";
+
+  $: console.log(modalContent);
 
   onMount(() => {
+    openModal = (id, title) => {
+      console.log('from inside the Modal component');
+      console.log(id);
+      console.log(title);
+      active = true;
+      console.log(success);
+      modalContent = title;
+      todoID = id;
+    };
+
     closeModal = () => {
-      modalCardcomponent.closeSuccess();
+      console.log(modalContent);
+      console.log(todoID);
+      async function handleEdit(modalContent) {
+        console.log(modalContent);
+        try {
+          await updateTodo({
+            variables: {
+              todoID,
+              todoTitle: modalContent,
+            },
+          });
+        } catch (e) {
+          console.error('error: ', e);
+        } finally {
+          console.log(modalContent);
+          modalContent = '';
+          active = !active;
+          todoID = 0;
+          modalCardcomponent.closeSuccess();
+        }
+      }
+      handleEdit();
+      console.log('clicked on closeModal');
     };
   });
-  async function openModal(id, title) {
-    console.log('from inside the Modal component');
-    console.log(id);
-    console.log(title);
-    active = true;
-    console.log(success);
-    modalContent = title;
-    if (success === false) {
-      console.log('Cerrando y perfecto');
-      // try {
-      //   if (active == false) {
-      //     console.log(active);
-      //     await updateTodo({
-      //       variables: {
-      //         todoID,
-      //         todoTitle: modalContent,
-      //       },
-      //     });
-      //   }
-      // } catch (e) {
-      //   console.error('error: ', e);
-      // } finally {
-      //   modalContent = '';
-      //   active = !active;
-      // }
-    }
-  }
-  // async function handleEdit(todoID, todoTitle) {
-  //   modalContent = todoTitle;
-  //   console.log(modalContent);
-  //   console.log(todoID);
-  //   try {
-  //     if (active == false) {
-  //       console.log(active);
-  //       await updateTodo({
-  //         variables: {
-  //           todoID,
-  //           todoTitle: modalContent,
-  //         },
-  //       });
-  //     }
-  //   } catch (e) {
-  //     console.error('error: ', e);
-  //   } finally {
-  //     modalContent = '';
-  //     active = !active;
-  //   }
-  // }
+  let newTitle = '';
+  let onBlur;
+  const handleQuickUpdate = (id) => (event) => {
+    newTitle = event.target.innerText;
+    onBlur = () => {
+      try {
+        updateTodo({
+          variables: {
+            todoID: id,
+            todoTitle: newTitle.toString(),
+          },
+          refetchQueries: [
+            readTodoQuery, // DocumentNode object parsed with gql
+            'getTodo', // Query name
+          ],
+        });
+      } catch (e) {
+        console.error('error: ', e);
+      } finally {
+        todoID = 0;
+        newTitle = '';
+      }
+    };
+  };
 </script>
 
 <section class="section">
@@ -183,7 +191,7 @@
             <td class="has-text-left"
               ><p
                 contenteditable="true"
-                on:input={quickUpdate(id)}
+                on:input={handleQuickUpdate(id)}
                 on:blur={onBlur}
               >
                 {title}
@@ -231,14 +239,16 @@
         <!-- <tr><td>owner</td><td><span class="tag">{st.data.task.userId}</span></td></tr> -->
       </tbody>
     </table>
-    <ModalCard
-      bind:active
-      title="Edit Todo"
-      saveButton="Save Todo's Edit"
-      bind:this={modalCardcomponent}
-    >
+    <ModalCard bind:active title="Edit Todo" bind:this={modalCardcomponent}>
       <textarea class="textarea is-primary" bind:value={modalContent} />
-      <button on:click|preventDefault={closeModal}>Click</button>
+      <footer class="modal-card-foot">
+        <button class="button is-success" on:click={closeModal}
+          >{saveButton}</button
+        >
+        <button class="button" on:click={modalCardcomponent.closeFailure}
+          >Cancel</button
+        >
+      </footer>
     </ModalCard>
   {/if}
 </section>
