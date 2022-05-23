@@ -104,25 +104,31 @@
 
   let newTitle = '';
   let onBlur;
+  let reload;
   const handleQuickUpdate = (id) => (event) => {
     newTitle = event.target.innerText;
     onBlur = () => {
-      try {
-        updateTodo({
-          variables: {
-            todoID: id,
-            todoTitle: newTitle.toString(),
-          },
-          refetchQueries: [
-            readTodoQuery, // DocumentNode object parsed with gql
-            'getTodo', // Query name
-          ],
-        });
-      } catch (e) {
-        console.error('error: ', e);
-      } finally {
-        todoID = 0;
-        newTitle = '';
+      if (newTitle === '' || /^\s*$/.test(newTitle) || newTitle.length === 0) {
+        console.log("content can't be empty");
+        // refectch or update value
+      } else {
+        try {
+          updateTodo({
+            variables: {
+              todoID: id,
+              todoTitle: newTitle.toString(),
+            },
+            refetchQueries: [
+              readTodoQuery, // DocumentNode object parsed with gql
+              'getTodo', // Query name
+            ],
+          });
+        } catch (e) {
+          console.error('error: ', e);
+        } finally {
+          todoID = 0;
+          newTitle = '';
+        }
       }
     };
   };
