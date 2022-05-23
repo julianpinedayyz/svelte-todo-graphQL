@@ -178,9 +178,9 @@
         {#each [...$todos.data.todosList].reverse() as { id, title, done }}
           <tr>
             <td><span class="tag">{id}</span></td>
-            <td class="has-text-left"
-              ><p
-                contenteditable="true"
+            <td class="has-text-left">
+              <p
+                contenteditable={done == false ? true : false}
                 on:input={handleQuickUpdate(id)}
                 on:blur={onBlur}
               >
