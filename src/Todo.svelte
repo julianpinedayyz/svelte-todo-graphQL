@@ -67,51 +67,41 @@
 
   let active = false;
   let modalContent;
-  let success = false;
   let closeModal;
   let openModal;
   let modalCardcomponent;
   let saveButton = "Save Todo's Edit";
-
-  $: console.log(modalContent);
-
-  onMount(() => {
-    openModal = (id, title) => {
-      console.log('from inside the Modal component');
-      console.log(id);
-      console.log(title);
-      active = true;
-      console.log(success);
-      modalContent = title;
-      todoID = id;
-    };
-
-    closeModal = () => {
-      console.log(modalContent);
-      console.log(todoID);
-      async function handleEdit(modalContent) {
-        console.log(modalContent);
-        try {
-          await updateTodo({
-            variables: {
-              todoID,
-              todoTitle: modalContent,
-            },
-          });
-        } catch (e) {
-          console.error('error: ', e);
-        } finally {
-          console.log(modalContent);
-          modalContent = '';
-          active = !active;
-          todoID = 0;
-          modalCardcomponent.closeSuccess();
-        }
+  // for debugging purpose only
+  // $: console.log(modalContent);
+  openModal = (id, title) => {
+    active = true;
+    modalContent = title;
+    todoID = id;
+  };
+  closeModal = () => {
+    function handleEdit() {
+      try {
+        updateTodo({
+          variables: {
+            todoID: todoID,
+            todoTitle: modalContent.toString(),
+          },
+          refetchQueries: [
+            readTodoQuery, // DocumentNode object parsed with gql
+            'getTodo', // Query name
+          ],
+        });
+      } catch (e) {
+        console.error('error: ', e);
+      } finally {
+        modalContent = '';
+        active = !active;
+        todoID = 0;
       }
-      handleEdit();
-      console.log('clicked on closeModal');
-    };
-  });
+    }
+    handleEdit();
+  };
+
   let newTitle = '';
   let onBlur;
   const handleQuickUpdate = (id) => (event) => {
