@@ -185,13 +185,24 @@
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">
-              <p
-                contenteditable={done == false ? true : false}
-                on:input={handleQuickUpdate(id)}
-                on:blur={onBlur}
-              >
-                {title}
-              </p>
+              {#if done == false}
+                <p
+                  contenteditable="true"
+                  on:input={handleQuickUpdate(id)}
+                  on:blur={onBlur}
+                >
+                  {title}
+                </p>
+              {:else}
+                <div class="message is-success is-radiusless">
+                  <p
+                    contenteditable="false"
+                    class="message-body is-radiusless px-2 py-3"
+                  >
+                    {title}
+                  </p>
+                </div>
+              {/if}
             </td>
             {#if done == false}
               <td
