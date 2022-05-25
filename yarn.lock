@@ -476,6 +476,11 @@
   dependencies:
     "tweetnacl" "^0.14.3"
 
+"big.js@^5.2.2":
+  "integrity" "sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ=="
+  "resolved" "https://registry.npmjs.org/big.js/-/big.js-5.2.2.tgz"
+  "version" "5.2.2"
+
 "binary-extensions@^2.0.0":
   "integrity" "sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA=="
   "resolved" "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
@@ -942,6 +947,11 @@
   "integrity" "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="
   "resolved" "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz"
   "version" "8.0.0"
+
+"emojis-list@^3.0.0":
+  "integrity" "sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q=="
+  "resolved" "https://registry.npmjs.org/emojis-list/-/emojis-list-3.0.0.tgz"
+  "version" "3.0.0"
 
 "encoding@^0.1.12":
   "integrity" "sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A=="
@@ -1533,6 +1543,11 @@
   "resolved" "https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz"
   "version" "5.0.1"
 
+"json5@^2.1.2":
+  "integrity" "sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA=="
+  "resolved" "https://registry.npmjs.org/json5/-/json5-2.2.1.tgz"
+  "version" "2.2.1"
+
 "jsprim@^1.2.2":
   "integrity" "sha512-P2bSOMAc/ciLz6DzgjVlGJP9+BrJWu5UDGK70C2iweC5QBIeFf0ZXRvGjEj2uYgrY2MkAAhsSWHDWlFtEroZWw=="
   "resolved" "https://registry.npmjs.org/jsprim/-/jsprim-1.4.2.tgz"
@@ -1577,6 +1592,15 @@
     "livereload-js" "^3.3.1"
     "opts" ">= 1.2.0"
     "ws" "^7.4.3"
+
+"loader-utils@^2.0.0":
+  "integrity" "sha512-TM57VeHptv569d/GKh6TAYdzKblwDNiumOdkFnejjD0XwTH87K90w3O7AiJRqdQoXygvi1VQTJTLGhJl7WqA7A=="
+  "resolved" "https://registry.npmjs.org/loader-utils/-/loader-utils-2.0.2.tgz"
+  "version" "2.0.2"
+  dependencies:
+    "big.js" "^5.2.2"
+    "emojis-list" "^3.0.0"
+    "json5" "^2.1.2"
 
 "loader-utils@^3.2.0":
   "integrity" "sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ=="
@@ -3035,10 +3059,29 @@
   "resolved" "https://registry.npmjs.org/svelte-apollo/-/svelte-apollo-0.4.0.tgz"
   "version" "0.4.0"
 
+"svelte-dev-helper@^1.1.9":
+  "integrity" "sha1-fRh9tcbNu9ZNdaMvkbiZi94yc8M="
+  "resolved" "https://registry.npmjs.org/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz"
+  "version" "1.1.9"
+
 "svelte-fa@^2.4.0":
   "integrity" "sha512-0bnbMGbsE1LUnlioDcf27tl2O8kjuXlTXMXzIxC7LoIOWmqn0D+zd539HfLiQbdLuOHGTaynwN9V+4ehhEu1Jw=="
   "resolved" "https://registry.npmjs.org/svelte-fa/-/svelte-fa-2.4.0.tgz"
   "version" "2.4.0"
+
+"svelte-hmr@^0.14.2":
+  "integrity" "sha512-R9CVfX6DXxW1Kn45Jtmx+yUe+sPhrbYSUp7TkzbW0jI5fVPn6lsNG9NEs5dFg5qRhFNAoVdRw5qQDLALNKhwbQ=="
+  "resolved" "https://registry.npmjs.org/svelte-hmr/-/svelte-hmr-0.14.11.tgz"
+  "version" "0.14.11"
+
+"svelte-loader@^3.1.2":
+  "integrity" "sha512-RhVIvitb+mtIwKNyvNQoDQ0EhXg2KH8LhQiiqeJh8u6vqJyGWoMoFcYCar69TT+1iaK5IYe0wPNYJ6TILcsurw=="
+  "resolved" "https://registry.npmjs.org/svelte-loader/-/svelte-loader-3.1.2.tgz"
+  "version" "3.1.2"
+  dependencies:
+    "loader-utils" "^2.0.0"
+    "svelte-dev-helper" "^1.1.9"
+    "svelte-hmr" "^0.14.2"
 
 "svelte-preprocess@^4.10.6":
   "integrity" "sha512-I2SV1w/AveMvgIQlUF/ZOO3PYVnhxfcpNyGt8pxpUVhPfyfL/CZBkkw/KPfuFix5FJ9TnnNYMhACK3DtSaYVVQ=="
@@ -3052,7 +3095,7 @@
     "sorcery" "^0.10.0"
     "strip-indent" "^3.0.0"
 
-"svelte@^3.0.0", "svelte@^3.23.0", "svelte@>=3.5.0":
+"svelte@^3.0.0", "svelte@^3.23.0", "svelte@^3.48.0", "svelte@>=3.19.0", "svelte@>=3.5.0", "svelte@>3.0.0":
   "integrity" "sha512-fN2YRm/bGumvjUpu6yI3BpvZnpIm9I6A7HR4oUNYd7ggYyIwSA/BX7DJ+UXXffLp6XNcUijyLvttbPVCYa/3xQ=="
   "resolved" "https://registry.npmjs.org/svelte/-/svelte-3.48.0.tgz"
   "version" "3.48.0"
