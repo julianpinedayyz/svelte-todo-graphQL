@@ -2,11 +2,16 @@ type Todo {
   id: Int
   title: String!
   done: Boolean
+  createdAt: Date!
+  updatedAt: Date!
+  completedAt: Date
 }
 
 input TodoInput {
   title: String!
   done: Boolean
+  createdAt: Date!
+  updatedAt: Date!
 }
 
 type Query {
@@ -17,6 +22,7 @@ type TodoUpdate {
   id: Int
   done: Boolean
   title: String
+  updatedAt: Date!
 }
 
 type Mutation {
