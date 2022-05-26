@@ -7,6 +7,9 @@
         id
         title
         done
+        createdAt
+        completedAt
+        updatedAt
       }
     }
   `;
