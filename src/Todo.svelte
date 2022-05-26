@@ -181,7 +181,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each [...$todos.data.todosList].reverse() as { id, title, done }}
+        {#each [...$todos.data.todosList].reverse() as { id, title, done, createdAt, completedAt }}
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">
@@ -193,6 +193,7 @@
                 >
                   {title}
                 </p>
+                <p class="is-size-7 dateGreen">{createdAt}</p>
               {:else}
                 <div class="message is-success is-radiusless">
                   <p
@@ -201,6 +202,7 @@
                   >
                     {title}
                   </p>
+                  <p class="is-size-7 dateGreen">{completedAt}</p>
                 </div>
               {/if}
             </td>
@@ -269,5 +271,9 @@
   }
   .textarea {
     width: 100%;
+  }
+  .dateGreen {
+    color: teal;
+    font-weight: 700;
   }
 </style>
