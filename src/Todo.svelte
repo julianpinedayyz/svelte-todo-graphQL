@@ -16,16 +16,23 @@
   // import {interpret} from 'xstate';
   // import {toggleMachine} from './machine';
 
-  const todos = query(readTodoQuery);
+  export const queries = {
+    todos: query(readTodoQuery),
+    deleteTodo: mutation(deleteTodoMutation),
+    updateTodo: mutation(updateTodoMutation),
+  };
 
-  const listTasks = async () => {
+  let todos = queries.todos;
+  const deleteTodo = queries.deleteTodo;
+  const updateTodo = queries.updateTodo;
+
+  const listTodos = async () => {
     const reply = query(readTodoQuery);
     reply.subscribe((data) => console.log('todosList', data));
   };
 
-  listTasks();
+  listTodos();
 
-  const deleteTodo = mutation(deleteTodoMutation);
   let todoID = 0;
 
   async function handleDelete(todoID) {
@@ -44,7 +51,6 @@
     }
   }
 
-  const updateTodo = mutation(updateTodoMutation);
   let todoStatus = false;
 
   async function handleUpdate(todoID, todoStatus) {
