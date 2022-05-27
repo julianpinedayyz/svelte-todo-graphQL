@@ -37,9 +37,11 @@
 
   setClient(client);
 
-  import { query } from 'svelte-apollo';
+  import { mutation, query } from 'svelte-apollo';
   import { readTodoQuery } from './queries/getTODOS.svelte';
+  import { createTodoMutation } from './queries/createTODO.svelte';
   export const todos = query(readTodoQuery);
+  export const createTodo = mutation(createTodoMutation);
 </script>
 
 <!--  -->
@@ -55,7 +57,7 @@
 </svelte:head>
 <main>
   <h1>GRAPHQL LIST OF PENDINGS</h1>
-  <Add />
+  <Add {createTodo} />
   <StatusNav {todos} />
   <Todo {todos}>
     <slot name="update"><!-- optional fallback --></slot>

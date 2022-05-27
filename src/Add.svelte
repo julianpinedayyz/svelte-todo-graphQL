@@ -1,14 +1,10 @@
 <script>
-  import { mutation } from 'svelte-apollo';
-  import { createTodoMutation } from './queries/createTODO.svelte';
   import { readTodoQuery } from './queries/getTODOS.svelte';
-  // import { marked } from 'marked';
   import Icon from './Icon.svelte';
 
   let todoTitle = '';
   let todoDone = false;
-
-  const createTodo = mutation(createTodoMutation);
+  export let createTodo;
 
   async function handleSubmit(e) {
     e.preventDefault();
