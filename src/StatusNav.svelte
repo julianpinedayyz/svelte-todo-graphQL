@@ -1,3 +1,7 @@
+<script>
+  // your script goes here
+</script>
+
 <nav class="level">
   <div class="level-item has-text-centered">
     <div>
