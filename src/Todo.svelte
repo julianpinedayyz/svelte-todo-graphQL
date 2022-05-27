@@ -4,7 +4,6 @@
   import { deleteTodoMutation } from './queries/deleteTODO.svelte';
   import { updateTodoMutation } from './queries/updateTODO.svelte';
 
-  import { onMount } from 'svelte';
   import Fa from 'svelte-fa';
   import { Button } from 'svelma';
   import {
@@ -17,12 +16,11 @@
   // import {toggleMachine} from './machine';
 
   export const queries = {
-    todos: query(readTodoQuery),
     deleteTodo: mutation(deleteTodoMutation),
     updateTodo: mutation(updateTodoMutation),
   };
 
-  let todos = queries.todos;
+  export let todos;
   const deleteTodo = queries.deleteTodo;
   const updateTodo = queries.updateTodo;
 
@@ -146,34 +144,6 @@
   {:else if $todos.error}
     Error: {$todos.error.message}
   {:else}
-    <nav class="level">
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Total Posts</p>
-          <p class="title">{$todos.data.todosList.length}</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Completed</p>
-          <p class="title">
-            {$todos.data.todosList.filter((todo) => todo.done).length}
-          </p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Followers</p>
-          <p class="title">456K</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Likes</p>
-          <p class="title">789</p>
-        </div>
-      </div>
-    </nav>
     <table class="todosTable table is-hoverable is-striped">
       <thead>
         <tr>

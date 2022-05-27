@@ -1,4 +1,5 @@
 <script>
+  import StatusNav from './StatusNav.svelte';
   import Todo from './Todo.svelte';
   import Add from './Add.svelte';
   import { InMemoryCache, ApolloClient } from '@apollo/client';
@@ -35,6 +36,10 @@
   });
 
   setClient(client);
+
+  import { query } from 'svelte-apollo';
+  import { readTodoQuery } from './queries/getTODOS.svelte';
+  export const todos = query(readTodoQuery);
 </script>
 
 <!--  -->
@@ -51,7 +56,10 @@
 <main>
   <h1>GRAPHQL LIST OF PENDINGS</h1>
   <Add />
-  <Todo />
+  <StatusNav {todos} />
+  <Todo {todos}>
+    <slot name="update"><!-- optional fallback --></slot>
+  </Todo>
 </main>
 
 <style lang="scss">
