@@ -109,6 +109,7 @@
   let newTitle = '';
   let onBlur;
   let reload;
+  let updatedAt;
   const handleQuickUpdate = (id) => (event) => {
     newTitle = event.target.innerText;
     onBlur = () => {
@@ -121,6 +122,7 @@
             variables: {
               todoID: id,
               todoTitle: newTitle.toString(),
+              // updatedAt: new Date().toISOString(),
             },
             refetchQueries: [
               readTodoQuery, // DocumentNode object parsed with gql
@@ -132,6 +134,7 @@
         } finally {
           todoID = 0;
           newTitle = '';
+          updatedAt = '';
         }
       }
     };
@@ -149,15 +152,14 @@
         <tr>
           <th>ID</th>
           <th class="nameTag">Name</th>
-          <!-- <th>Created at</th>
-          <th>Status</th> -->
+          <!-- <th>Created at</th> -->
           <th>Status</th>
           <th>Edit</th>
           <th>Delete?</th>
         </tr>
       </thead>
       <tbody>
-        {#each [...$todos.data.todosList].reverse() as { id, title, done, createdAt, completedAt }}
+        {#each [...$todos.data.todosList].reverse() as { id, title, done, createdAt, completedAt, updatedAt, completeBy }}
           <tr>
             <td><span class="tag">{id}</span></td>
             <td class="has-text-left">
@@ -169,7 +171,19 @@
                 >
                   {title}
                 </p>
-                <p class="is-size-7 dateGreen">{createdAt}</p>
+                <p>
+                  <span class="is-size-7 dateGreen"
+                    >Date Created {createdAt}</span
+                  >
+                  |
+                  <span class="is-size-7 dateGreen"
+                    >Last updated {updatedAt}</span
+                  >
+                  |
+                  <span class="is-size-7 dateGreen"
+                    >Complete by{completeBy}</span
+                  >
+                </p>
               {:else}
                 <div class="message is-success is-radiusless">
                   <p
@@ -178,7 +192,22 @@
                   >
                     {title}
                   </p>
-                  <p class="is-size-7 dateGreen">{completedAt}</p>
+                  <p>
+                    <span class="is-size-7 dateGreen"
+                      >Date Created {createdAt}</span
+                    >
+                    |
+                    <span class="is-size-7 dateGreen"
+                      >Last updated {updatedAt}</span
+                    >
+                    |
+                    <span class="is-size-7 dateGreen"
+                      >Date Completed {completedAt}</span
+                    >
+                    <span class="is-size-7 dateGreen"
+                      >Complete by {completeBy}</span
+                    >
+                  </p>
                 </div>
               {/if}
             </td>

@@ -10,6 +10,7 @@
         createdAt
         completedAt
         updatedAt
+        completeBy
       }
     }
   `;
