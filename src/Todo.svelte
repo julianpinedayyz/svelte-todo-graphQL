@@ -90,6 +90,7 @@
             todoID: todoID,
             todoTitle: modalContent.toString(),
           },
+          //  TODO Maybe we don't need to refetch the query?
           refetchQueries: [
             readTodoQuery, // DocumentNode object parsed with gql
             'getTodo', // Query name
