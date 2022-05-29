@@ -1,10 +1,28 @@
 <script>
+  import { onMount } from 'svelte';
   import { readTodoQuery } from './queries/getTODOS.svelte';
   import Icon from './Icon.svelte';
 
   let todoTitle = '';
   let todoDone = false;
+  let completeBy = '';
   export let createTodo;
+  let now = new Date(),
+    month,
+    day,
+    year;
+  let dateString;
+
+  onMount(() => {
+    (month = '' + (now.getMonth() + 1)),
+      (day = '' + now.getDate()),
+      (year = now.getFullYear());
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    dateString = [year, month, day].join('-');
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -15,10 +33,12 @@
       return false;
     } else {
       try {
+        completeBy = dateString;
         await createTodo({
           variables: {
             todoTitle,
             todoDone,
+            completeBy,
           },
           refetchQueries: [
             readTodoQuery, // DocumentNode object parsed with gql
@@ -30,6 +50,7 @@
       } finally {
         todoTitle = '';
         todoDone = false;
+        completeBy = '';
       }
     }
   }
@@ -51,6 +72,17 @@
             />
           </p>
           <p class="control">
+            <span class="is-block"
+              ><input
+                type="date"
+                class="input is-normal"
+                bind:value={dateString}
+                min={new Date().toISOString().split('T')[0]}
+              /></span
+            >
+            <span class="is-size-7 dateGreen">Due date: {dateString}</span>
+          </p>
+          <p class="control">
             <button class="button is-primary" type="submit">
               <span class="icon-text">
                 <span class="icon">
@@ -67,4 +99,7 @@
 </section>
 
 <style lang="scss">
+  .input.is-normal {
+    height: 40px;
+  }
 </style>
