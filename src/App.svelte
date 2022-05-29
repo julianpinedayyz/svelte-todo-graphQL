@@ -40,32 +40,24 @@
   import { mutation, query } from 'svelte-apollo';
   import { readTodoQuery } from './queries/getTODOS.svelte';
   import { createTodoMutation } from './queries/createTODO.svelte';
-  export let id = '';
-  export let title = '';
-  export let done = '';
-  export let createdAt = '';
-  export let completedAt = '';
-  export let updatedAt = '';
-  export let completeBy = '';
+
+  export let props = {
+    id: '',
+    title: '',
+    done: false,
+    createdAt: '',
+    completedAt: '',
+    updatedAt: '',
+    completeBy: '',
+  };
+
   export const todos = query(readTodoQuery, {
     variables: {
-      id,
-      title,
-      done,
-      createdAt,
-      completedAt,
-      updatedAt,
-      completeBy,
+      props,
     },
   });
   $: todos.refetch({
-    id,
-    title,
-    done,
-    createdAt,
-    completedAt,
-    updatedAt,
-    completeBy,
+    props,
   });
   export const createTodo = mutation(createTodoMutation);
 </script>
