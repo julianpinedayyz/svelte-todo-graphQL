@@ -136,8 +136,14 @@ TODO  List all enhancements made in `rollup.config.js`
 ## TODOS
 
 - **Svelte Specifics**
+- Launch it with Astro, Meteor
+- Launch it inside a Docker container
 - Add Drag and drop capabilities to arrange posts [Drag and drop with Svelte using svelte-dnd-action](https://dev.to/isaachagoel/drag-and-drop-with-svelte-using-svelte-dnd-action-4554)
 - Caching [graphQL caching](https://dev.to/ajcwebdev/graphql-caching-42ep)
+- UI Libraries
+  - [MUI](https://svelte-mui.vercel.app)
+  - [Bulma](https://bulma.io), [Bulma Swatch](https://jenil.github.io/bulmaswatch/)
+  - [Carbon from IBM](https://carbon-components-svelte.onrender.com)
 - Dgraph -> Try it as a second option. [https://github.com/dgraph-io/dgraph](https://github.com/dgraph-io/dgraph), [Getting started](https://dgraph.io/docs/get-started/), [Quick Start](https://dgraph.io/docs/graphql/quick-start/)
 - Urql as a third option with Svelte [https://formidable.com/open-source/urql/docs/basics/svelte/](https://formidable.com/open-source/urql/docs/basics/svelte/)
 - **Apollo Quick Links**
@@ -147,17 +153,7 @@ TODO  List all enhancements made in `rollup.config.js`
   - [Resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/)
 - **GraphQL Quick References**
   - [Designing GraphQL schemas](https://dgraph.io/blog/post/designing-graphql-schemas/)
-  -
-
-
-
-
-
-
-
-
-
-
-
-
-
+  - [GraphQL Tutorial](https://www.tutorialspoint.com/graphql/index.htm)
+  - [GraphQL with Svelte, Apollo and Hasura](https://hasura.io/learn/graphql/svelte-apollo/introduction/)
+  - [Modern GraphQL examples with strings, compilers, and SDKs](https://hasura.io/blog/graphql-examples/)
+  - [GraphQL Tools](https://www.graphql-tools.com)
