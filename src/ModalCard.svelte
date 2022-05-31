@@ -1,11 +1,12 @@
 <script>
   import { onDestroy, onMount, createEventDispatcher } from 'svelte';
   import { chooseAnimation, isEscKey } from './utils/index';
+  import { scale } from 'svelte/transition';
 
   export let active = false;
   export let title = 'Modal Title';
-  export let animation = 'scale';
-  export let animProps = { start: 1.2 };
+  export let animation = scale;
+  // export let animProps = { duration: 2000 };
   export let size = '';
   export let showClose = true;
   export let onBody = true;
@@ -51,7 +52,7 @@
 
 <div class="modal {size}" class:is-active={active} bind:this={modal}>
   <div class="modal-background" on:click={close} />
-  <div class="modal-card" transition:_animation|local={animProps}>
+  <div class="modal-card" transition:scale={{ start: 100, duration: 2000 }}>
     <header class="modal-card-head">
       <p class="modal-card-title">{title}</p>
       <button class="delete" aria-label="close" on:click={close} />
