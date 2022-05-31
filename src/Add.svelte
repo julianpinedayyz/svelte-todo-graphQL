@@ -40,10 +40,24 @@
             todoDone,
             completeBy,
           },
-          refetchQueries: [
-            readTodoQuery, // DocumentNode object parsed with gql
-            'getTodo', // Query name
-          ],
+          // update: (cache, { data }) => {
+          //   const existingTodos = cache.readQuery({ query: readTodoQuery });
+          //   console.log(existingTodos.todosList);
+          //   // Add the new todo to the cache
+          //   console.log('cache updated', data);
+          //   const newTodo = data.createTodo;
+          //   newTodo.todo.completedAt = newTodo.todo.completedAt
+          //     ? newTodo.todo.completedAt
+          //     : null;
+          //   console.log('newTodo', newTodo);
+          //   const newTodos = [...existingTodos.todosList, newTodo];
+          //   console.log('newTodos', newTodos);
+          //   cache.writeQuery({
+          //     query: readTodoQuery,
+          //     data: { todosList: newTodos },
+          //   });
+          // },
+          refetchQueries: [readTodoQuery],
         });
       } catch (e) {
         console.error('error: ', e);

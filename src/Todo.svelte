@@ -182,7 +182,7 @@
                   >
                   |
                   <span class="is-size-7 dateGreen"
-                    >Complete by{completeBy}</span
+                    >Complete by {completeBy}</span
                   >
                 </p>
               {:else}
