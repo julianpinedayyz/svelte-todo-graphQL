@@ -30,3 +30,13 @@ type Mutation {
   deleteTodo(id: Int!): Todo
   updateTodo(input: TodoUpdate): Todo
 }
+
+type ListenPayload {
+  query: Query
+  relatedNode: Node
+  relatedNodeId: ID
+}
+
+type Subscription {
+  listen(topic: String!): ListenPayload!
+}
