@@ -167,7 +167,7 @@
               {#if done == false}
                 <p
                   contenteditable="true"
-                  on:input={handleQuickUpdate(id)}
+                  on:input={() => handleQuickUpdate(id)}
                   on:blur={onBlur}
                 >
                   {title}
@@ -241,7 +241,7 @@
             <td>
               <button
                 class="button is-danger is-outlined"
-                on:click|preventDefault={handleDelete(id)}
+                on:click|preventDefault={() => handleDelete(id)}
               >
                 <Fa icon={faTrashAlt} />
               </button>
