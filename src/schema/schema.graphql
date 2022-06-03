@@ -30,13 +30,13 @@ type Mutation {
   deleteTodo(id: Int!): Todo
   updateTodo(input: TodoUpdate): Todo
 }
+# this only works on the server side and not on the client side
+# type ListenPayload {
+#   query: Query
+#   relatedNode: Node
+#   relatedNodeId: ID
+# }
 
-type ListenPayload {
-  query: Query
-  relatedNode: Node
-  relatedNodeId: ID
-}
-
-type Subscription {
-  listen(topic: String!): ListenPayload!
-}
+# type Subscription {
+#   listen(topic: String!): ListenPayload!
+# }
