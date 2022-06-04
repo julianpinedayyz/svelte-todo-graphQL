@@ -239,12 +239,9 @@
               >
             {/if}
             <td>
-              <button
-                class="button is-danger is-outlined"
-                on:click|preventDefault={() => handleDelete(id)}
+              <Button type="is-danger" on:click={() => handleDelete(id)}
+                ><Fa icon={faTrashAlt} /></Button
               >
-                <Fa icon={faTrashAlt} />
-              </button>
             </td>
           </tr>
         {/each}
