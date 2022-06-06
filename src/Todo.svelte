@@ -1,7 +1,6 @@
 <script>
   import { mutation, query } from 'svelte-apollo';
   import { readTodoQuery } from './queries/getTODOS.svelte';
-  import { deleteTodoMutation } from './queries/deleteTODO.svelte';
   import { updateTodoMutation } from './queries/updateTODO.svelte';
 
   import Fa from 'svelte-fa';
@@ -9,19 +8,17 @@
   import {
     faArrowRotateLeft,
     faCheck,
-    faTrashAlt,
     faPenAlt,
   } from '@fortawesome/free-solid-svg-icons';
+  import DeleteBtn from './DeleteBtn.svelte';
   // import {interpret} from 'xstate';
   // import {toggleMachine} from './machine';
 
   export const queries = {
-    deleteTodo: mutation(deleteTodoMutation),
     updateTodo: mutation(updateTodoMutation),
   };
 
   export let todos;
-  const deleteTodo = queries.deleteTodo;
   const updateTodo = queries.updateTodo;
 
   const listTodos = async () => {
@@ -31,23 +28,23 @@
 
   listTodos();
 
-  let todoID = 0;
+  // let todoID = 0;
 
-  async function handleDelete(todoID) {
-    try {
-      deleteTodo({
-        variables: { todoID },
-        refetchQueries: [
-          readTodoQuery, // DocumentNode object parsed with gql
-          'getTodo', // Query name
-        ],
-      });
-    } catch (e) {
-      console.error('error: ', e);
-    } finally {
-      todoID = 0;
-    }
-  }
+  // async function handleDelete(todoID) {
+  //   try {
+  //     deleteTodo({
+  //       variables: { todoID },
+  //       refetchQueries: [
+  //         readTodoQuery, // DocumentNode object parsed with gql
+  //         'getTodo', // Query name
+  //       ],
+  //     });
+  //   } catch (e) {
+  //     console.error('error: ', e);
+  //   } finally {
+  //     todoID = 0;
+  //   }
+  // }
 
   let todoStatus = false;
 
@@ -239,9 +236,8 @@
               >
             {/if}
             <td>
-              <Button type="is-danger" on:click={() => handleDelete(id)}
-                ><Fa icon={faTrashAlt} /></Button
-              >
+              {id}
+              <DeleteBtn />
             </td>
           </tr>
         {/each}
