@@ -236,8 +236,7 @@
               >
             {/if}
             <td>
-              {id}
-              <DeleteBtn />
+              <DeleteBtn {id} />
             </td>
           </tr>
         {/each}
