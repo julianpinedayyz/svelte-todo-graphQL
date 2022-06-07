@@ -3,7 +3,7 @@
   import { Button } from 'svelma';
   import { deleteTodoMutation } from './queries/deleteTODO.svelte';
   import { readTodoQuery } from './queries/getTODOS.svelte';
-  import { mutation, query } from 'svelte-apollo';
+  import { mutation } from 'svelte-apollo';
   import Fa from 'svelte-fa';
 
   export const queries = {
