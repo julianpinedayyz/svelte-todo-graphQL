@@ -10,7 +10,6 @@
     deleteTodo: mutation(deleteTodoMutation),
   };
 
-  export let todos;
   const deleteTodo = queries.deleteTodo;
 
   let todoID = 0;
