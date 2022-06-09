@@ -12,8 +12,7 @@
 
   const deleteTodo = queries.deleteTodo;
 
-  let todoID = 0;
-  let id;
+  export let id;
 
   async function handleDelete(todoID) {
     try {
@@ -33,5 +32,5 @@
 </script>
 
 <Button type="is-danger" on:click={() => handleDelete(id)}
-  ><Fa icon={faTrashAlt} />{id}</Button
+  ><Fa icon={faTrashAlt} /></Button
 >
