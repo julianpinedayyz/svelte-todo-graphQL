@@ -11,6 +11,7 @@
         completedAt
         updatedAt
         completeBy
+        archived
       }
     }
   `;
