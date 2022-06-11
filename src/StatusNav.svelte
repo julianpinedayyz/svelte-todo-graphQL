@@ -24,8 +24,10 @@
     </div>
     <div class="level-item has-text-centered">
       <div>
-        <p class="heading">Followers</p>
-        <p class="title">456K</p>
+        <p class="heading">Archived</p>
+        <p class="title">
+          {$todos.data.todosList.filter((todo) => todo.archived).length}
+        </p>
       </div>
     </div>
     <div class="level-item has-text-centered">
