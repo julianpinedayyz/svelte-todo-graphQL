@@ -32,8 +32,10 @@
     </div>
     <div class="level-item has-text-centered">
       <div>
-        <p class="heading">Likes</p>
-        <p class="title">789</p>
+        <p class="heading">Deleted</p>
+        <p class="title">
+          {$todos.data.todosList.filter((todo) => todo.deleted).length}
+        </p>
       </div>
     </div>
   </nav>
