@@ -3,7 +3,7 @@ module.exports = {
     service: {
       name: "svelte-todo-graphQL",
       url: "http://localhost:5055/graphql",
-      localSchemaFile: "./schema/schema.graphql"
+      localSchemaFile: "./src/schema/schema.graphql",
     },
   },
 };
