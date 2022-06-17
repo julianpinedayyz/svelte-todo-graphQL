@@ -49,6 +49,8 @@
     completedAt: '',
     updatedAt: '',
     completeBy: '',
+    archived: false,
+    deleted: false,
   };
 
   export const todos = query(readTodoQuery, {
