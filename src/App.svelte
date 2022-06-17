@@ -76,7 +76,7 @@
     crossorigin="anonymous"></script>
 </svelte:head>
 <main>
-  <h1>GRAPHQL LIST OF PENDINGS</h1>
+  <h1>PROJECT(O)</h1>
   <Add {createTodo} />
   <StatusNav {todos} />
   <Todo {todos}>
