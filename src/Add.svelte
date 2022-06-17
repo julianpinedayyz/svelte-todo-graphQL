@@ -70,7 +70,7 @@
   }
 </script>
 
-<section class="section">
+<section class="section py-1">
   <div class="content">
     <div class="columns">
       <div class="column is-full quickTodo">
