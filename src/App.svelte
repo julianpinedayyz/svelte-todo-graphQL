@@ -77,8 +77,8 @@
 </svelte:head>
 <main>
   <h1>PROJECT(O)</h1>
-  <Add {createTodo} />
   <StatusNav {todos} />
+  <Add {createTodo} />
   <Todo {todos}>
     <slot name="update"><!-- optional fallback --></slot>
   </Todo>
