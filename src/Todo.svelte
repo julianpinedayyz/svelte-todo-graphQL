@@ -139,6 +139,9 @@
   };
 </script>
 
+<section class="section filterBtns py-1">
+  <Button type="is-success">Archived</Button>
+</section>
 <section class="section">
   {#if $todos.loading}
     <span class="spinner-loader" style="margin-top: 10em">Loading…</span>
