@@ -20,8 +20,8 @@
 
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
-
-    dateString = [year, month, day].join('-');
+    // Adding 7 days to the current date for the completeBy date as the default value
+    dateString = [year, month, parseInt(day) + 7].join('-');
   });
 
   async function handleSubmit(e) {
