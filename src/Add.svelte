@@ -86,8 +86,10 @@
             />
           </p>
           <p class="control">
-            <span class="is-block"
-              ><input
+            <span class="is-block">
+              <!-- Reference to the new Date() solution below -->
+              <!-- https://stackoverflow.com/questions/17182544/disable-certain-dates-from-html5-datepicker -->
+              <input
                 type="date"
                 class="input is-normal"
                 bind:value={dateString}
